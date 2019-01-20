@@ -3,59 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Tic_Tac_Toe</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        background: white;
-    }
-    .restart {
-        font-size: 20px;
-        width: 100px;
-        border: none;
-        background-color: #bfe6d9;
-        height: 30px;
-        margin-top: 10px;
-    }
-    button {
-        width: 100px;
-        height: 100px;
-        border: none;
-        background-color: #bfe6d9;
-        padding: 0;
-        font-size: 40px
-    }
-    td {
-        padding: 4px 4px 4px 4px;
-        border-right-width: 0;
-    }
-    table {
-        width: 300px;
-        height: 300px;
-        border: 1px solid #5d766a;
-        border-collapse: collapse;
-    }
-</style>
-<body>
+<body onload="startGame()">
+    <h1>Tic-Tac-Toe 3x3</h1>
+    <p id="message">messages will go here</p>
     <table>
         <tbody>
         <tr>
-            <td><button id="0" onclick="getButtonId(id)"></button></td>
-            <td><button id="1" onclick="getButtonId(id)"></button></td>
-            <td><button id="2" onclick="getButtonId(id)"></button></td>
+            <td><button id="1" onclick="nextMove(this)"></button></td>
+            <td><button id="2" onclick="nextMove(this)"></button></td>
+            <td><button id="3" onclick="nextMove(this)"></button></td>
         </tr>
         <tr>
-            <td><button id="3" onclick="getButtonId(id)"></button></td>
-            <td><button id="4" onclick="getButtonId(id)"></button></td>
-            <td><button id="5" onclick="getButtonId(id)"></button></td>
+            <td><button id="4" onclick="nextMove(this)"></button></td>
+            <td><button id="5" onclick="nextMove(this)"></button></td>
+            <td><button id="6" onclick="nextMove(this)"></button></td>
         </tr>
         <tr>
-            <td><button id="6" onclick="getButtonId(id)"></button></td>
-            <td><button id="7" onclick="getButtonId(id)"></button></td>
-            <td><button id="8" onclick="getButtonId(id)"></button></td>
+            <td><button id="7" onclick="nextMove(this)"></button></td>
+            <td><button id="8" onclick="nextMove(this)"></button></td>
+            <td><button id="9" onclick="nextMove(this)"></button></td>
         </tr>
         </tbody>
     </table>
-    <button class="btn btn-info restart" onclick="restartGame()" type="button">Restart</button>
+    <button class="restart" onclick="clearBox()" type="button">Restart</button>
 <script src="main.js"></script>
 </body>
 </html>

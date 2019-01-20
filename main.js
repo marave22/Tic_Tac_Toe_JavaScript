@@ -1,56 +1,66 @@
-let player = {
-    X_move: [],
-    O_move: [],
-    move: 0,
-    clickId: "",
-    winningCombinations: [
-        [1, 2, 3],[4, 5, 6],[7, 8, 9],
-        [1, 4, 7],[2, 5, 8],[3, 6, 9],
-        [1, 5, 9],[3, 5, 7]
-    ]
+let turn  = "X";
+let winner = null;
+
+startGame = () => {
+    setMessage(turn + " gets to start");
 };
 
-getButtonId = (id) => {
-    player.clickId = id;
-    if (player.move % 2 === 0) {
-        document.getElementById(player.clickId).innerHTML = "X";
-        player.X_move.unshift(player.clickId);
-        console.log(player.X_move);
+setMessage = (msg) => {
+    document.getElementById('message').innerText = msg;
+};
+
+nextMove = (square) => {
+    if (winner !== null) {
+        setMessage(winner + " already won the game.");
+    } else if (square.innerText === "") {
+        square.innerText = turn;
+        switchTurn();
     } else {
-        document.getElementById(player.clickId).innerHTML = "O";
-        player.O_move.unshift(player.clickId);
-        console.log(player.O_move);
+        setMessage("Draw");
     }
-    player.move += 1;
-
-    if (player.X_move.length > 3 && player.O_move.length > 3) {
-        player.X_move.forEach(function (element) {
-            for (let i = 0; i < player.winningCombinations.length; i++) {
-                for (let j = 0; j < player.X_move.length; j++) {
-                    if (player.winningCombinations[i].includes(element)) {
-                        alert("Winner is X");
-                    }
-                }
-            }
-        });
-        player.O_move.forEach(function (element) {
-            for (let k = 0; k < player.winningCombinations.length; k++) {
-                for (let m = 0; m < player.O_move.length; m++) {
-                    if (player.winningCombinations[k].includes(element)) {
-                        alert("Winner is O");
-                    } else {
-                        alert("Draw");
-                    }
-                }
-            }
-        });
-    }
-
 };
 
-function restartGame() {
-    for (let s = 0; s < 10; s++) {
-        player.X_move = 0;
-        player.O_move = 0;
+switchTurn =  () => {
+    if (checkWinner(turn)) {
+        setMessage(turn + " win!!!");
+        winner = turn;
+    } else if (turn === "X") {
+        turn = "O";
+        setMessage("It's " + turn + "'s turn");
+    } else {
+        turn = "X";
+        setMessage("It's " + turn + "'s turn");
     }
-}
+};
+
+checkRow = (a, b, c, move) => {
+    let result = false;
+    if (getBox(a) === move && getBox(b) === move && getBox(c) === move) {
+        result = true;
+    }
+    return result;
+};
+
+getBox = (number) => {
+   return document.getElementById(number).innerText;
+};
+
+checkWinner = (move) => {
+  let result = false;
+  if (checkRow(1, 2, 3, move) ||
+      checkRow(4, 5, 6, move) ||
+      checkRow(7, 8, 9, move) ||
+      checkRow(1, 4, 7, move) ||
+      checkRow(2, 5, 8, move) ||
+      checkRow(3, 6, 9, move) ||
+      checkRow(1, 5, 9, move) ||
+      checkRow(3, 5, 7, move)) {
+
+      result = true;
+  }
+  return result;
+};
+
+clearBox = () => {
+    return document.location.reload(true);
+};
